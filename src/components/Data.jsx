@@ -12,17 +12,19 @@ const Data = ({elem,allTask,id,setAlltask,setAdd,seteditTask}) => {
     seteditTask(idx)
   }
   function deleteHandler() {
-    let totalTask = [...allTask]
-    totalTask.splice(id,1)
-    setAlltask(totalTask)
-  }
+  if (!Array.isArray(allTask)) return;
+
+  let totalTask = [...allTask];
+  totalTask.splice(id, 1);
+  setAlltask(totalTask);
+}
   return (
         <div className="flex items-center justify-between px-5 w-full border-b-1 border-gray-400 py-3">
           <div className="flex items-center gap-8">
             <input
               className="w-6 cursor-pointer accent-green-600 h-6"
               type="checkbox"
-              checked = {elem.completed}
+              checked = {elem?.completed || false}
               onChange={checkHandler}
             />
             <h2 className="text-2xl">[ {elem.text} ]</h2>
